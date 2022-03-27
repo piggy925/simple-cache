@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 缓存淘汰策略 - FIFO
+ * 缓存淘汰策略 - FIFO - 先进先出
  *
  * @author mumu
  * @date 2022/3/26
@@ -17,11 +17,10 @@ public class CacheEvictFifo<K, V> implements ICacheEvict<K, V> {
     private Queue<K> queue = new LinkedList<>();
 
     @Override
-
     public void evict(ICacheEvictContext<K, V> context) {
         final ICache<K, V> cache = context.cache();
         // Cache大小超过限制，则移除最早加入的元素
-        if (cache.size() > context.size()) {
+        if (cache.size() >= context.size()) {
             K evictKey = queue.remove();
             cache.remove(evictKey);
         }
