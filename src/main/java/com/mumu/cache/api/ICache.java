@@ -15,4 +15,22 @@ public interface ICache<K, V> extends Map<K, V> {
      * @return 淘汰
      */
     ICacheEvict<K, V> evict();
+
+    /**
+     * Expire cache.
+     *
+     * @param key         the key
+     * @param timeInMills 在多长时间后过期（单位为毫秒）
+     * @return the cache
+     */
+    ICache<K, V> expire(final K key, final long timeInMills);
+
+    /**
+     * 在指定的时间过期
+     *
+     * @param key         the key
+     * @param timeInMills 过期时间
+     * @return the cache
+     */
+    ICache<K, V> expireAt(final K key, final long timeInMills);
 }

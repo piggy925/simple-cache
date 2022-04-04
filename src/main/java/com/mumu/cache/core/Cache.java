@@ -75,6 +75,17 @@ public class Cache<K, V> implements ICache<K, V> {
     }
 
     @Override
+    public ICache<K, V> expire(K key, long timeInMills) {
+        long expireTime = System.currentTimeMillis() + timeInMills;
+        return this.expireAt(key, expireTime);
+    }
+
+    @Override
+    public ICache<K, V> expireAt(K key, long timeInMills) {
+        return null;
+    }
+
+    @Override
     public V put(K key, V value) {
         // 1. 尝试驱除
         CacheEvictContext<K, V> context = new CacheEvictContext<>();
